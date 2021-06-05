@@ -8,7 +8,7 @@ export default (pageList: any) => {
     const newEntry:any = {
           id: entry[0],
           title: entry[1].value.properties.title[0][0],
-          imageLink: entry[1].value.format ? `https://www.notion.so/image/${encodeURIComponent(entry[1].value.format?.page_icon)}?table=block&id=${entry[0]}&cache=v2` : ''
+          imageLink: entry[1].value.format ? `https://www.notion.so/image/${encodeURIComponent(entry[1].value.format?.page_icon)}?table=block&id=${entry[0]}&cache=v2` : '/post_images/empty_image.svg'
       };
       Object.keys(entry[1].value.properties).forEach((key: string) => {
         const schema = schemaMap[key];

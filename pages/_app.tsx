@@ -13,12 +13,16 @@ import '../styles/globals.css'
 
 import { ReactNode } from 'react';
 
-import type { AppProps } from 'next/app'
+import type { AppProps } from 'next/app';
+
+interface LayoutAppProps extends AppProps {
+  Layout: ReactNode;
+}
 
 const Noop = ({ children }: { children: ReactNode }) => children;
 
-function MyApp({ Component, pageProps }: AppProps) {
-  
+function MyApp({ Component, pageProps }: LayoutAppProps) {
+  // @ts-expect-error
   const Layout = Component.Layout || Noop
   
   return <Layout><Component {...pageProps} /></Layout>

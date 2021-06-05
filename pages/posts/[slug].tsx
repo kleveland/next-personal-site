@@ -23,13 +23,13 @@ export const getStaticProps = async (context: any) => {
   console.log(foundPost);
   const results = await getPost(foundPost.id);
   const foundImageBlock = Object.keys(results.recordMap.block).find((key: string) => results.recordMap.block[key].value.type === 'page');
-  const foundImageLink = foundImageBlock ? results.recordMap.block[foundImageBlock].value.format.page_icon : '';
+  const foundImageLink = (foundImageBlock && results.recordMap.block[foundImageBlock].value.format?.page_icon) ? results.recordMap.block[foundImageBlock].value.format.page_icon : false;
   console.log(foundImageLink);
   //Correct
   //https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff72ffe9f-5a03-4b12-af62-68d4d5b05e69%2F3.png?table=block&id=ad8bab48-7d68-4f84-add0-ddaf3b65bbfd&cache=v2
   //Wrong
   //https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff72ffe9f-5a03-4b12-af62-68d4d5b05e69%2F3.png?table=block&${}&cache=v2
-  const imageUrl = foundImageBlock ? `https://www.notion.so/image/${encodeURIComponent(foundImageLink)}?table=block&id=${results.recordMap.block[foundImageBlock].value.id}&cache=v2` : '';
+  const imageUrl = (foundImageLink && foundImageBlock) ? `https://www.notion.so/image/${encodeURIComponent(foundImageLink)}?table=block&id=${results.recordMap.block[foundImageBlock].value.id}&cache=v2` : '/post_images/empty_image.svg';
   console.log(imageUrl);
   const recordMap = results.recordMap;
   return {
@@ -84,7 +84,7 @@ function NotionPage({
     return null;
   }
   console.log(recordMap);
-  console.log(title, recordMap);
+  console.log(title, imageUrl);
 
   return (
     <div>
