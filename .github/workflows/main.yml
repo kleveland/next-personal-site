@@ -40,7 +40,7 @@ jobs:
           target-folder: _posts # Saves the data into the 'data' directory on the master branch.
       - name: Build
         run: |
-          npm ci
+          yarn install --frozen-lockfile
           npm run build
           npm run export
       - name: Deploy
