@@ -1,0 +1,26 @@
+.blog-post-title-container {
+  padding-left: calc(min(12px, 8vw));
+  padding-right: calc(min(12px, 8vw));
+  margin: 0 auto;
+}
+
+.blog-post-image-container {
+    display: inline-block;
+}
+
+.blog-post-title {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 2rem;
+    margin: 12px 0 0 24px;
+  }
+  
+
+@media only screen and (max-width: 600px) {
+  .blog-post-image-container {
+    display: none;
+  }
+  .blog-post-title {
+    margin: 0;
+  }  
+}
