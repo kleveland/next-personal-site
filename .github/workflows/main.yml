@@ -38,13 +38,11 @@ jobs:
           branch: main # Pushes the updates to the master branch.
           folder: fetch-api-data-action # The location of the data.json file saved by the Fetch API Data action.
           target-folder: _posts # Saves the data into the 'data' directory on the master branch.
-      - name: Build
-        run: |
-          yarn install --frozen-lockfile
-          npm run build
-          npm run export
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Build and Deploy
+        uses: amondnet/vercel-action@v20
         with:
-          deploy_key: ${{ secrets.GH_PAGES_SECRET_KEY }}
-          publish_dir: ./out
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+          vercel-args: '--prod' #Optional
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required 
+          working-directory: ./sub-directory

@@ -62,7 +62,8 @@ export async function getStaticPaths() {
   // set paths to an empty array to not pre-generate any pages at build time.
 
   return {
-    paths: mappedSlugs
+    paths: mappedSlugs,
+    fallback: true
   };
 }
 
