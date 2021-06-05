@@ -37,4 +37,4 @@ jobs:
         with:
           branch: master # Pushes the updates to the master branch.
           folder: fetch-api-data-action # The location of the data.json file saved by the Fetch API Data action.
-          target_folder: data # Saves the data into the 'data' directory on the master branch.
+          target-folder: _posts # Saves the data into the 'data' directory on the master branch.
