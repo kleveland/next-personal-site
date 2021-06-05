@@ -5,7 +5,7 @@ import Link from "next/link";
 import Head from "next/head";
 import getPostList from "../api/post-list";
 import styles from "../../styles/blogsummary.module.css";
-import pageList from "../../_posts/test_blog_list.json";
+import pageList from "../../_posts/data.json";
 import MainLayout from "../../layouts/main";
 
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;

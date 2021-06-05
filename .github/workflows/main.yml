@@ -32,9 +32,9 @@ jobs:
           ENDPOINT: https://www.notion.so/api/v3/queryCollection
           CONFIGURATION: '{ "method": "POST", "headers": { "content-type": "application/json" }, "body": { "collectionId": "19d7f583-b6a6-460d-9eb4-19c02a221c91", "collectionViewId": "5e65b9ab-dc54-4ecd-bae7-94e390151488", "loader": { "type": "reducer", "reducers": { "collection_group_results": { "type": "results", "limit": 50 }, "table:title:count": { "type": "aggregation", "aggregation": { "property": "title", "aggregator": "count" } } }, "searchQuery": "", "userTimeZone": "America/New_York" }, "query": {} } }'
 
-      - name: Build and Deploy 🚀
+      - name: Store Data in _posts/data.json 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          branch: master # Pushes the updates to the master branch.
+          branch: main # Pushes the updates to the master branch.
           folder: fetch-api-data-action # The location of the data.json file saved by the Fetch API Data action.
           target-folder: _posts # Saves the data into the 'data' directory on the master branch.

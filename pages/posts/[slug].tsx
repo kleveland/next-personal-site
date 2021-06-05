@@ -5,7 +5,7 @@ import styles from "../../styles/blogpost.module.css";
 import getPostList from "../api/post-list";
 import getPost from "../api/post";
 import { NotionRenderer, Code, CollectionRow } from "react-notion-x";
-import pageList from "../../_posts/test_blog_list.json";
+import pageList from "../../_posts/data.json";
 import MainLayout from '../../layouts/main';
 
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
