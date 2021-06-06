@@ -91,6 +91,7 @@ function NotionPage({
       <Head>
         <title>Kacey Cleveland - {title}</title>
         <meta name="description" content={Description} />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles["blog-post-title-container"]}>
         <div className={styles["blog-post-image-container"]}>
@@ -98,9 +99,10 @@ function NotionPage({
           src={imageUrl}
           width={64}
           height={64}
+          alt="Post image"
         />
         </div>
-        <div className={styles["blog-post-title"] + ' notion-h'}>{title}</div>
+        <div className={styles["blog-post-title"] + ' notion-h notion-h1'}>{title}</div>
       </div>
       <NotionRenderer
         components={{

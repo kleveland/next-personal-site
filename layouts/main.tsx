@@ -92,9 +92,9 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
   );
 }
 
-function NavItem({ title, link, active }: NavItemProps) {
+function NavItem({ title, link, active }: NavItemProps, index: number) {
   return (
-    <Link href={link}>
+    <Link href={link} key={"nav-item-"+index}>
       <div className={"nav-item " + (active ? "active" : "")}>{title}</div>
     </Link>
   );
@@ -112,7 +112,7 @@ function NavItemMenu() {
         <span></span>
       </div>
       <div className={"mobile-nav-items-container " + (isOpen ? "open" : "")}>
-        {NAV_LIST.map((NavItem) => NavItemMobile({ ...NavItem, toggleOpen }))}
+        {NAV_LIST.map((NavItem, index) => NavItemMobile({ ...NavItem, toggleOpen }, index))}
       </div>
     </div>
   );
@@ -123,9 +123,9 @@ function NavItemMobile({
   link,
   active,
   toggleOpen,
-}: NavItemMobileProps) {
+}: NavItemMobileProps, index: number) {
   return (
-    <Link href={link}>
+    <Link href={link} key={"nav-item-"+index}>
       <div
         onClick={toggleOpen}
         className={"nav-item-mobile " + (active ? "active" : "")}
@@ -136,10 +136,10 @@ function NavItemMobile({
   );
 }
 
-function SocialIcon({ link, title, component }: SocialIconProps) {
+function SocialIcon({ link, title, component }: SocialIconProps, index: number) {
   return (
-    <div title={title} className="social-icon-container">
-      <Link href={link}>{component}</Link>
+    <div title={title} className="social-icon-container"  key={"social-item-"+index}>
+      <Link href={link}><a>{component}</a></Link>
     </div>
   );
 }

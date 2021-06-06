@@ -10,6 +10,7 @@ import 'rc-dropdown/assets/index.css'
 // used for rendering equations (optional)
 import 'katex/dist/katex.min.css'
 import '../styles/globals.css'
+import '../styles/notion-overrides.css'
 
 import { ReactNode } from 'react';
 

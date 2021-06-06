@@ -8,7 +8,7 @@
   width: 64px;
   margin-right: 1rem;
   padding: 0.5rem;
-  background-color: var(--secondary);
+  background-color: var(--main);
 }
 
 .blog-entry-title-container {

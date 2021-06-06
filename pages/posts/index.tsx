@@ -41,7 +41,6 @@ export const getStaticProps = async () => {
 
 function NotionPage({ mappedList }: PostList) {
   const router = useRouter();
-  console.log(mappedList);
   return (
     <>
       <Head>
@@ -50,8 +49,8 @@ function NotionPage({ mappedList }: PostList) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles["blog-posts-title-container"]+ ' notion-h notion-h1'}>Recent Posts</div>
-      {mappedList.map((entry: PostEntry) => (
-        <PostEntryCard router={router} {...entry} />
+      {mappedList.map((entry: PostEntry, index: number) => (
+        <PostEntryCard key={'post-entry-'+index} router={router} {...entry} />
       ))}
     </>
   );
@@ -62,13 +61,13 @@ function PostEntryCard(props: PostEntryCardProps) {
     <div className={styles["blog-entry-container"]}>
       <div className={styles["blog-image-container"]}>
         {props.imageLink && (
-          <Image src={props.imageLink} width={64} height={64} />
+          <Image alt="Post image" src={props.imageLink} width={64} height={64} />
         )}
       </div>
       <div className={styles["blog-entry-text-container"]}>
         <div className={styles["blog-entry-title-container"]+ ' notion-h'}>
           <Link href={`/posts/${props["Slug"]}`}>
-            <div className={styles["blog-entry-title"]}>{props["title"]}</div>
+            <a className={styles["blog-entry-title"]}>{props["title"]}</a>
           </Link>
           <div className={styles["blog-entry-date"]}>
             {props["Creation Date"]}

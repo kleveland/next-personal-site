@@ -1,0 +1,15 @@
+.notion-page {
+  width: inherit;
+}
+
+.notion-collection-row {
+  border-bottom: 1px solid var(--secondary);
+}
+
+.notion-collection-row-property .notion-collection-column-title {
+  color: var(--secondary);
+}
+
+.notion-collection-row-property .notion-collection-column-title svg {
+  fill: var(--secondary);
+}
