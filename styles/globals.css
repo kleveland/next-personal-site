@@ -19,17 +19,14 @@ body {
   color: var(--body-color);
 }
 
-/* unvisited link */
 a:link {
   color: var(--main);
 }
 
-/* visited link */
 a:visited {
   color: var(--secondary-offset);
 }
 
-/* mouse over link */
 a:hover {
   color: var(--secondary);
 }
@@ -285,6 +282,16 @@ a:hover {
   border-bottom: 1px solid black;
 }
 
-.notion-page {
-  width: inherit;
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000000;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
 }

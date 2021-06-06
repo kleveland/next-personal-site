@@ -95,7 +95,7 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
 function NavItem({ title, link, active }: NavItemProps, index: number) {
   return (
     <Link href={link} key={"nav-item-"+index}>
-      <div className={"nav-item " + (active ? "active" : "")}>{title}</div>
+      <div id={index === 0 ? "skip-link": undefined} className={"nav-item " + (active ? "active" : "")}>{title}</div>
     </Link>
   );
 }
