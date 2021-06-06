@@ -3,13 +3,14 @@ import axios from "axios";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   axios.post(
-    "https://api.github.com/repos/kleveland/next-personal-site/dispatches",
+    "https://api.github.com/repos/kleveland/next-personal-site/actions/workflows/main.yml/dispatches",
     {
-      'event-type': "hello",
+      ref: "main"
     },
     {
       headers: {
-        Authorization: `Basic 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`,
+        Accept: 'application/vnd.github.v3+json',
+        Authorization: `token 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`,
       },
     }
   );
