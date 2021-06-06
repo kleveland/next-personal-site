@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
 
   return (
     <>
-      <a className="skip-link" href="#skip-link"></a>
+      <a className="skip-link" href="#skip-link">Skip to main</a>
       <Layout>
         <Component {...pageProps} />
       </Layout>
