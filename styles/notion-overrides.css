@@ -1,5 +1,22 @@
+:root {
+    --notion-item-blue: var(--main);
+    --notion-item-orange: var(--main);
+    --notion-item-green:var(--main);
+    --notion-item-pink: var(--main);
+    --notion-item-brown: var(--main);
+    --notion-item-red: var(--main);
+    --notion-item-yellow: var(--main);
+}
+
+
 .notion-page {
   width: inherit;
+}
+
+.notion-property-multi_select-item {
+    color: var(--background);
+    padding: 5px 5px;
+    margin: 0 6px 0 0;
 }
 
 .notion-collection-row {
@@ -12,4 +29,9 @@
 
 .notion-collection-row-property .notion-collection-column-title svg {
   fill: var(--secondary);
+}
+
+pre.notion-code {
+    padding: 1em;
+    background: #2d2d2d;
 }
