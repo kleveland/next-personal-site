@@ -79,9 +79,9 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
       <div className="header-container">
         <div className="navigation-header-text">KC</div>
         <div className="navigation-container">
-          <div className="navigation-inner-container">
+          {width != 0 && <div className="navigation-inner-container">
             {isMobile ? <NavItemMenu /> : NAV_LIST.map(NavItem)}
-          </div>
+          </div>}
         </div>
       </div>
       <div className={"header-social-container " + (isMobile ? "mobile" : "")}>

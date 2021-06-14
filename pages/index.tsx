@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/home.module.css'
 import MainLayout from '../layouts/main';
 import getPost from "./api/post";
 import { ReactElement } from 'react';

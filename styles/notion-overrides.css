@@ -35,3 +35,11 @@ pre.notion-code {
     padding: 1em;
     background: #2d2d2d;
 }
+
+.notion-blue_background {
+  padding: 5px 5px;
+  background: var(--main);
+  color: var(--background);
+  border-radius: 3px;
+  line-height: 120%;
+}

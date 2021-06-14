@@ -102,14 +102,7 @@
   padding: 1rem 0 0 0.5rem;
 }
 
-
-@media (max-width: 650px) {
-  .main-body-container {
-    padding: 0;
-  }
-}
-
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .main-header-container {
     flex-direction: column;
   }
