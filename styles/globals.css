@@ -8,6 +8,8 @@
   --header-color: #202020;
   --body-color: #202020;
   --background: #fafafa;
+  --light: #8f8f8f;
+  --xlight: #bcbcbc;
 }
 
 html,
@@ -292,4 +294,17 @@ a:hover {
 
 .skip-link:focus {
   top: 0;
+}
+
+.page-footer {
+  font-size: 1rem;
+  color: var(--xlight);
+  border-top: 1px solid var(--light);
+  padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+@media (max-width: 600px) {
+  .page-footer {
+    text-align: center;
+  }
 }

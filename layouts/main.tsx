@@ -88,6 +88,7 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
         {SOCIAL_LIST.map(SocialIcon)}
       </div>
       <div className="page-content">{children}</div>
+      <div className="page-footer">Made with ♥ by Kacey Cleveland</div>
     </div>
   );
 }
