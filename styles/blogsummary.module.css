@@ -4,7 +4,7 @@
 
 .blog-image-container {
   border-radius: 5px;
-  height: auto;
+  height: 64px;
   width: 64px;
   margin-right: 1rem;
   padding: 0.5rem;
@@ -27,6 +27,10 @@
 
 .blog-entry-title-container {
   position: relative;
+}
+
+.blog-entry-text-container {
+  flex: 1;
 }
 
 .blog-entry-title {
