@@ -29,7 +29,7 @@ const NAV_LIST = [
     link: "/",
   },
   { title: "Posts", link: "/posts" },
-  { title: "Experience", link: "/cv" },
+  { title: "Projects", link: "/projects" },
 ];
 
 const SOCIAL_LIST = [

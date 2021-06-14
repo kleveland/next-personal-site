@@ -7,10 +7,28 @@ export default async (pageId: string) => {
   const result: any = await axios.post(PAGE_ENDPOINT, {
     chunkNumber: 0,
     cursor: { stack: [] },
-    limit: 25,
-    pageId,
+    limit: 100,
+    page: {
+      id: pageId
+    },
     verticalColumns: false,
-  });  
+  });
+
+  console.log(result.data.cursor);
+  const stack = result.data.cursor?.stack;
+  if (stack)
   
   return result.data;
 };
+
+async function getPage(pageId: string, chunkNumber: number) {
+  return (await axios.post(PAGE_ENDPOINT, {
+    chunkNumber,
+    cursor: { stack: [] },
+    limit: 50,
+    page: {
+      id: pageId
+    },
+    verticalColumns: false,
+  }));
+}
