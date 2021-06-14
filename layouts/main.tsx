@@ -35,19 +35,19 @@ const NAV_LIST = [
 const SOCIAL_LIST = [
   {
     path: "/social/github.svg",
-    link: "#",
+    link: "https://github.com/kleveland",
     title: "Github Profile",
     component: <GithubComponent width={24} height={24} />,
   },
   {
     path: "/social/linkedin.svg",
-    link: "#",
+    link: "https://www.linkedin.com/in/kaceycleveland/",
     title: "Linkedin Profile",
     component: <LinkedinComponent width={24} height={24} />,
   },
   {
     path: "/social/medium.svg",
-    link: "#",
+    link: "https://kaceycleveland.medium.com/",
     title: "Medium Profile",
     component: <MediumComponent width={24} height={24} />,
   },
