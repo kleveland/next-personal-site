@@ -64,14 +64,15 @@ a:hover {
 
 .header-social-container {
   text-align: right;
-  padding-right: 1rem;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .header-social-container.mobile {
-  right: 3rem;
-  top: 0;
+  position: absolute;
+  left: 50px;
+  top: 31px;
   z-index: 2;
-  padding-top: 0.4rem;
 }
 
 .social-icon-container {
@@ -110,8 +111,12 @@ a:hover {
   padding: 0.2rem;
   line-height: 32px;
   border-radius: 50%;
-  position: absolute;
+  display: inline-block;
   z-index: 2;
+}
+
+.navigation-header-text.mobile {
+  position: absolute;
 }
 
 .navigation-inner-container {

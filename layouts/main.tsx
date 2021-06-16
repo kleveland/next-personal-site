@@ -28,7 +28,6 @@ const NAV_LIST = [
     title: "Home",
     link: "/",
   },
-  { title: "Posts", link: "/posts" },
   { title: "Projects", link: "/projects" },
 ];
 
@@ -86,7 +85,12 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
   return (
     <>
       <div className={"header-container " + (isScrolled ? "scrolled" : "") }>
-        <div className="navigation-header-text">KC</div>
+        <div className={"navigation-header-text " + (isMobile ? "mobile" : "")}>KC</div>
+        <div
+          className={"header-social-container " + (isMobile ? "mobile" : "")}
+        >
+          {SOCIAL_LIST.map(SocialIcon)}
+        </div>
         <div className="navigation-container">
           {width != 0 && (
             <div className="navigation-inner-container">
@@ -96,11 +100,6 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
         </div>
       </div>
       <div className="root-container">
-        <div
-          className={"header-social-container " + (isMobile ? "mobile" : "")}
-        >
-          {SOCIAL_LIST.map(SocialIcon)}
-        </div>
         <div className="page-content">{children}</div>
         <div className="page-footer">Made with ♥ by Kacey Cleveland</div>
       </div>
