@@ -13,8 +13,6 @@ export default async (pageId: string) => {
     },
     verticalColumns: false,
   });
-
-  console.log(result.data.cursor);
   const stack = result.data.cursor?.stack;
   if (stack)
   

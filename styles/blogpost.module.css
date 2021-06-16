@@ -1,20 +1,98 @@
+.blog-table-of-contents {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 330px - 16px);
+  overflow: hidden auto;
+  min-width: 222px;
+  overflow: auto;
+}
+
+.blog-table-of-contents-title {
+  color: var(--header-color);
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--light);
+}
+
+.blog-table-of-contents__entry {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
+  margin-left: 0.25rem;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  transition: all 0.3s;
+}
+
+.blog-table-of-contents__entry:hover {
+  background-color: var(--light);
+  cursor: pointer;
+}
+
+.blog-table-of-contents__header {
+  margin-left: 0.25rem;
+}
+
+.blog-table-of-contents__sub_header {
+  margin-left: 1.25rem;
+}
+
+.blog-table-of-contents__sub_sub_header {
+  margin-left: 2.25rem;
+}
+
+.blog-table-of-contents__header:hover {
+  margin-left: 0.5rem;
+}
+
+.blog-table-of-contents__sub_header:hover {
+  margin-left: 1.5rem;
+}
+
+.blog-table-of-contents__sub_sub_header:hover {
+  margin-left: 2.5rem;
+}
+
+@media (min-width: 1300px) and (min-height: 300px) {
+  .blog-post-container {
+    display: flex;
+    flex-direction: row;
+    width: calc((100vw + var(--notion-max-width)) / 2);
+  }
+
+  .blog-post-notion-container {
+    width: var(--notion-max-width);
+    max-width: var(--notion-max-width);
+    padding: 0;
+    margin: 0;
+  }
+
+  .blog-notion-aside {
+    display: flex;
+    top: 330px;
+    align-items: baseline;
+    margin-left: 4rem;
+  }
+}
+
 .blog-post-title-container {
-  padding-left: calc(min(12px, 8vw));
-  padding-right: calc(min(12px, 8vw));
   margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .blog-post-image-container {
-    display: inline-block;
+  display: inline-block;
+  width: 64px;
+  height: 64px;
 }
 
 .blog-post-title {
-    display: inline-block;
-    vertical-align: top;
-    font-size: 2rem;
-    margin: 6px 0 0 24px;
-  }
-  
+  padding-left: 1rem;
+  display: inline-block;
+  flex: 1;
+  font-size: 2rem;
+  margin: 0;
+}
 
 @media only screen and (max-width: 640px) {
   .blog-post-image-container {
@@ -22,5 +100,5 @@
   }
   .blog-post-title {
     margin: 0;
-  }  
+  }
 }

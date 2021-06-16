@@ -8,14 +8,16 @@
   --header-color: #202020;
   --body-color: #202020;
   --background: #fafafa;
-  --light: #8f8f8f;
-  --xlight: #bcbcbc;
+  --light: #f2f2f2;
+  --light-text: #8f8f8f;
+  --xlight-text: #bcbcbc;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
   background: var(--background);
   color: var(--body-color);
@@ -41,10 +43,24 @@ a:hover {
 
 .header-container {
   height: 48px;
+  max-width: var(--notion-max-width);
   padding-left: calc(min(12px, 8vw));
   padding-right: calc(min(12px, 8vw));
   margin: 1.5rem auto 0 auto;
 }
+
+/* .header-container.scrolled {
+  max-width: calc(var(--notion-max-width) + 200px);
+}
+
+.header-container .navigation-container {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.header-container.scrolled .navigation-container {
+  opacity: 0;
+} */
 
 .header-social-container {
   text-align: right;
@@ -75,10 +91,6 @@ a:hover {
 
 .page-content {
   margin: 0 auto;
-}
-
-.notion-viewport {
-  display: none;
 }
 
 .navigation-container {
@@ -298,8 +310,8 @@ a:hover {
 
 .page-footer {
   font-size: 1rem;
-  color: var(--xlight);
-  border-top: 1px solid var(--light);
+  color: var(--xlight-text);
+  border-top: 1px solid var(--light-text);
   padding: 1rem 1.5rem 1rem 1.5rem;
 }
 

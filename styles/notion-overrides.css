@@ -9,6 +9,10 @@
 }
 
 
+.notion-viewport {
+  z-index: -1;
+}
+
 .notion-page {
   width: inherit;
 }
@@ -16,7 +20,7 @@
 .notion-property-multi_select-item {
     color: var(--background);
     padding: 5px 5px;
-    margin: 0 6px 0 0;
+    margin: 0 6px 6px 0;
 }
 
 .notion-collection-row {
