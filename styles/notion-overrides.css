@@ -24,15 +24,15 @@
 }
 
 .notion-collection-row {
-  border-bottom: 1px solid var(--secondary);
+  border-bottom: 1px solid var(--body-color);
 }
 
 .notion-collection-row-property .notion-collection-column-title {
-  color: var(--secondary);
+  color: var(--body-color);
 }
 
 .notion-collection-row-property .notion-collection-column-title svg {
-  fill: var(--secondary);
+  fill: var(--body-color);
 }
 
 pre.notion-code {

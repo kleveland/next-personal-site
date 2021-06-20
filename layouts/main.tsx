@@ -29,6 +29,7 @@ const NAV_LIST = [
     link: "/",
   },
   { title: "Projects", link: "/projects" },
+  { title: "Posts", link: "/posts" },
 ];
 
 const SOCIAL_LIST = [
@@ -52,7 +53,7 @@ const SOCIAL_LIST = [
   },
 ];
 
-const mobileBreakpoint = 620;
+const mobileBreakpoint = 680;
 
 export default function MainLayout({ children }: { children: JSX.Element }) {
   const router = useRouter();
@@ -61,20 +62,20 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
   const [offset, setOffset] = useState(0);
   const [width, setWidth] = useState(0);
   const isMobile = width != 0 && width < mobileBreakpoint;
-  const isScrolled = offset > 30;
+  const isScrolled = offset > 225;
 
   useEffect(() => {
     setWidth(window.innerWidth);
-    setOffset(window.pageYOffset)
+    setOffset(window.pageYOffset);
     const handleWindowResize = () => setWidth(window.innerWidth);
-    const handleScroll = () => setOffset(window.pageYOffset)
+    const handleScroll = () => setOffset(window.pageYOffset);
     window.addEventListener("resize", handleWindowResize);
     window.addEventListener("scroll", handleScroll);
     // Return a function from the effect that removes the event listener
     return () => {
       window.removeEventListener("resize", handleScroll);
       window.removeEventListener("resize", handleWindowResize);
-    }
+    };
   }, []);
 
   console.log(offset);
@@ -83,27 +84,35 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
     item.active = (matches ? matches[0] : router.pathname) === item.link;
   });
   return (
-    <>
-      <div className={"header-container " + (isScrolled ? "scrolled" : "") }>
-        <div className={"navigation-header-text " + (isMobile ? "mobile" : "")}>KC</div>
-        <div
-          className={"header-social-container " + (isMobile ? "mobile" : "")}
-        >
-          {SOCIAL_LIST.map(SocialIcon)}
-        </div>
-        <div className="navigation-container">
-          {width != 0 && (
-            <div className="navigation-inner-container">
-              {isMobile ? <NavItemMenu /> : NAV_LIST.map(NavItem)}
-            </div>
-          )}
+    <div className="page-container">
+      <div
+        className={"header-parent-container " + (isScrolled ? "scrolled" : "")}
+      >
+        <div className="header-container">
+          <div
+            className={"navigation-header-text " + (isMobile ? "mobile" : "")}
+          >
+            KC
+          </div>
+          <div
+            className={"header-social-container " + (isMobile ? "mobile" : "")}
+          >
+            {SOCIAL_LIST.map(SocialIcon)}
+          </div>
+          <div className="navigation-container">
+            {width != 0 && (
+              <div className="navigation-inner-container">
+                {isMobile ? <NavItemMenu /> : NAV_LIST.map(NavItem)}
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="root-container">
         <div className="page-content">{children}</div>
         <div className="page-footer">Made with ♥ by Kacey Cleveland</div>
       </div>
-    </>
+    </div>
   );
 }
 

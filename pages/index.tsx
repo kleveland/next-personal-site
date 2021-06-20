@@ -103,11 +103,13 @@ function PostEntryCard(props: PostEntryCardProps) {
   return (
     
     <Link href={`/posts/${props["Slug"]}`}>
-    <div className={postSummaryStyles["blog-entry-container"]}>
+    <a className={postSummaryStyles["blog-entry-container"]}>
+      <div className={postSummaryStyles["blog-image-parent-container"]}>
       <div className={postSummaryStyles["blog-image-container"]}>
         {props.imageLink && (
-          <Image alt="Post image" src={props.imageLink} width={64} height={64} />
+          <Image alt="Post image" src={props.imageLink} width={280} height={280} />
         )}
+      </div>
       </div>
       <div className={postSummaryStyles["blog-entry-text-container"]}>
         <div className={postSummaryStyles["blog-entry-title-container"]+ ' notion-h'}>
@@ -122,7 +124,7 @@ function PostEntryCard(props: PostEntryCardProps) {
           {props["Description"]}
         </div>
       </div>
-    </div>
+    </a>
           </Link>
   );
 }

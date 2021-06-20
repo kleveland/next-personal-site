@@ -1,12 +1,13 @@
 import React, { ReactElement } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Link from 'next/link';
+import Link from "next/link";
 import styles from "../../styles/blogpost.module.css";
 import getPostList from "../api/post-list";
 import getPost from "../api/post";
 import { NotionRenderer, Code, CollectionRow } from "react-notion-x";
 import { getPageTableOfContents, TableOfContentsEntry } from "notion-utils";
+import { useInView } from "react-intersection-observer";
 import pageList from "../../_posts/data.json";
 import MainLayout from "../../layouts/main";
 
@@ -61,6 +62,9 @@ export const getStaticProps = async (context: any) => {
     : "";
   return {
     props: {
+      pageBlock: foundImageBlock
+        ? results.recordMap.block[foundImageBlock]
+        : undefined,
       recordMap,
       imageUrl,
       tableOfContents,
@@ -84,10 +88,6 @@ export async function getStaticPaths() {
     params: { slug: entry["Slug"] },
   }));
   console.log(mappedSlugs);
-  // This crawls all public pages starting from the given root page in order
-  // for next.js to pre-generate all pages via static site generation (SSG).
-  // This is a useful optimization but not necessary; you could just as easily
-  // set paths to an empty array to not pre-generate any pages at build time.
 
   return {
     paths: mappedSlugs,
@@ -102,6 +102,7 @@ function NotionPage({
   Slug,
   imageUrl,
   Description,
+  pageBlock,
 }: {
   Slug: string;
   title: string;
@@ -109,13 +110,35 @@ function NotionPage({
   Description: string;
   recordMap: any;
   imageUrl: string;
+  pageBlock: any;
 }) {
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
+
+  console.log(inView, entry);
+
   if (!recordMap) {
     return null;
   }
-  console.log("toc", tableOfContents);
-  console.log(recordMap);
-  console.log(title, imageUrl);
+  //console.log("pageBlock", pageBlock);
+
+  const collectionId = pageBlock.value.parent_id;
+  const collection = recordMap.collection[collectionId]?.value;
+  const schemas = collection?.schema;
+  // console.log("testing", collectionId, collection, schemas);
+  // console.log("toc", tableOfContents);
+  // console.log(recordMap);
+  // console.log(title, imageUrl);
+
+  const pageHeader = (
+    <div className={styles["blog-post-title-container"]}>
+      <div className={styles["blog-post-title"] + " notion-h notion-h1"}>
+        {title}
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -124,25 +147,33 @@ function NotionPage({
         <meta name="description" content={Description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles["blog-post-title-container"]}>
-        <div className={styles["blog-post-image-container"]}>
-          <Image src={imageUrl} width={64} height={64} alt="Post image" />
-        </div>
-        <div className={styles["blog-post-title"] + " notion-h notion-h1"}>
-          {title}
-        </div>
+
+      <div
+        ref={ref}
+        className={
+          styles["blog-post-image-container"] +
+          " " +
+          (!inView ? styles["not-in-view"] : "")
+        }
+      >
+        <Image src={imageUrl} width={140} height={140} alt="Post image" />
       </div>
-      <div className={styles["blog-post-container"]}>
-        <NotionRenderer
-          className={styles["blog-post-notion-container"]}
-          components={{
-            code: Code,
-            collectionRow: CollectionRow,
-          }}
-          recordMap={recordMap}
-          darkMode={false}
-        />
-        <TableOfContents toc={tableOfContents} />
+      <div className={styles["blog-post-content-container"] +
+          " " + (!inView ? styles["set-index"] : "")}>
+        <CollectionRow block={pageBlock.value} />
+        <div className={styles["blog-post-container"]}>
+          <NotionRenderer
+            pageHeader={pageHeader}
+            className={styles["blog-post-notion-container"]}
+            components={{
+              code: Code,
+              collectionRow: CollectionRow,
+            }}
+            recordMap={recordMap}
+            darkMode={false}
+          />
+          <TableOfContents toc={tableOfContents} />
+        </div>
       </div>
     </>
   );
@@ -160,13 +191,22 @@ function TableOfContents({ toc }: TableOfContentsProps): ReactElement {
       </div>
       <div className={styles["blog-table-of-contents"]}>
         {toc.map((entry) => {
-          
           const className = "blog-table-of-contents__" + entry.type;
           const link = "#" + entry.id.replaceAll("-", "");
-          console.log(className)
-          return <Link href={link}><div className={styles['blog-table-of-contents__entry'] + ' ' + styles[className]}>
-            <a href={link}>{entry.text}</a>
-          </div></Link>;
+          console.log(className);
+          return (
+            <Link href={link}>
+              <div
+                className={
+                  styles["blog-table-of-contents__entry"] +
+                  " " +
+                  styles[className]
+                }
+              >
+                <a href={link}>{entry.text}</a>
+              </div>
+            </Link>
+          );
         })}
       </div>
     </aside>

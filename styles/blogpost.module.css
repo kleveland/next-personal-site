@@ -52,6 +52,17 @@
   margin-left: 2.5rem;
 }
 
+.blog-post-image-container {
+  margin-top: -5rem;
+  transition: 0.3s all;
+  opacity: 1;
+}
+
+.not-in-view {
+  opacity: 0;
+}
+
+
 @media (min-width: 1300px) and (min-height: 300px) {
   .blog-post-container {
     display: flex;
@@ -68,7 +79,7 @@
 
   .blog-notion-aside {
     display: flex;
-    top: 330px;
+    top: calc(min(330px, 30vh));
     align-items: baseline;
     margin-left: 4rem;
   }
@@ -76,14 +87,10 @@
 
 .blog-post-title-container {
   margin: 0 auto;
-  display: flex;
-  align-items: center;
 }
 
 .blog-post-image-container {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
+  text-align: center;
 }
 
 .blog-post-title {
@@ -95,6 +102,10 @@
 }
 
 @media only screen and (max-width: 640px) {
+  .blog-post-container {
+    margin-top: 0;
+  }
+
   .blog-post-image-container {
     display: none;
   }

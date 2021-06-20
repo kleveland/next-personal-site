@@ -1,17 +1,29 @@
 .blog-posts-title-container {
-  margin-left: 1rem;
+  text-align: center;
+  display: block;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--light);
 }
 
-.blog-image-container {
-  width: 80px;
+
+.blog-image-parent-container {
   background-color: var(--main);
+  padding: 10px;
+  overflow-x: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;
   transition: all 0.3s;
 }
 
-.blog-entry-container:hover .blog-image-container {
+
+.blog-image-container {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  transition: all 0.3s;
+}
+
+.blog-entry-container:hover .blog-image-parent-container {
   background-color: var(--secondary-offset);
 }
 
@@ -25,8 +37,8 @@
 
 .blog-entry-container {
   display: flex;
-  /* background-color: var(--light); */
   margin-bottom: 1rem;
+  text-decoration: none;
   background-color: var(--light);
   box-shadow: 0 1px 2px rgba(0,0,0,0);
   transition: all 0.3s;
@@ -54,12 +66,13 @@
 
 .blog-entry-date {
   margin-top: 0.5rem;
-  color: var(--secondary);
+  color: var(--body-color);
   font-size: 0.75rem;
 }
 
 .blog-entry-description {
   font-size: 16px;
+  text-decoration: none;
   color: var(--body-color);
 }
 

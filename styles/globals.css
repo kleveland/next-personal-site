@@ -2,9 +2,10 @@
 
 :root {
   --main: #016fb9;
-  --secondary: #36444B;
+  --main-offset: #145682;
+  --secondary: #01b94a;
   --secondary-offset: #20a4c5;
-  --highlight: #cc7f5c;
+  --highlight: #54e7ff;
   --header-color: #202020;
   --body-color: #202020;
   --background: #fafafa;
@@ -13,14 +14,14 @@
   --xlight-text: #bcbcbc;
 }
 
-html,
-body {
+html,body {
   padding: 0;
   margin: 0;
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
   background: var(--background);
   color: var(--body-color);
+  position: relative;
 }
 
 a:link {
@@ -41,26 +42,63 @@ a:hover {
   position: relative;
 }
 
+@-webkit-keyframes headerAnimate {
+  0%{background-position:25% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:25% 0%}
+}
+@-moz-keyframes headerAnimate {
+  0%{background-position:25% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:25% 0%}
+}
+@keyframes headerAnimate {
+  0%{background-position:25% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:25% 0%}
+}
+
+.header-parent-container {
+  background: 
+  radial-gradient(
+    circle at right top,
+    var(--main), 
+    transparent
+  ),
+  radial-gradient(
+    ellipse at right bottom,
+    var(--secondary-offset), 
+    transparent
+  ),
+  radial-gradient(
+    ellipse at left top,
+    var(--secondary),
+    transparent
+  ),
+  radial-gradient(
+    circle at left bottom,
+    var(--main),
+    transparent
+  ),
+  radial-gradient(
+    circle at center,
+    var(--secondary-offset), 
+    transparent
+  );
+background-size: 400% 100%;
+-webkit-animation: headerAnimate 20s ease infinite;
+-moz-animation: headerAnimate 20s ease infinite;
+animation: headerAnimate 20s ease infinite;
+padding-top: 1.5rem;
+}
+
 .header-container {
-  height: 48px;
+  height: 10rem;
   max-width: var(--notion-max-width);
   padding-left: calc(min(12px, 8vw));
   padding-right: calc(min(12px, 8vw));
-  margin: 1.5rem auto 0 auto;
+  margin: 0 auto;
 }
-
-/* .header-container.scrolled {
-  max-width: calc(var(--notion-max-width) + 200px);
-}
-
-.header-container .navigation-container {
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-.header-container.scrolled .navigation-container {
-  opacity: 0;
-} */
 
 .header-social-container {
   text-align: right;
@@ -81,7 +119,7 @@ a:hover {
 }
 
 .social-icon-container svg {
-  fill: var(--main);
+  fill: var(--body-color);
   cursor: pointer;
   transition: 0.3 all;
 }
@@ -102,9 +140,10 @@ a:hover {
 
 .navigation-header-text {
   font-size: 1rem;
-  background-color: var(--main);
-  color: var(--background);
-  font-weight: 500;
+  background-color: transparent;
+  border: 2px solid var(--header-color);
+  color: var(--header-color);
+  font-weight: 700;
   width: 32px;
   height: 32px;
   text-align: center;
@@ -117,6 +156,7 @@ a:hover {
 
 .navigation-header-text.mobile {
   position: absolute;
+  color: var(--header-color);
 }
 
 .navigation-inner-container {
@@ -132,6 +172,7 @@ a:hover {
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  color: var(--header-color);
   z-index: 1;
   border-radius: 16px;
   cursor: pointer;
@@ -139,7 +180,7 @@ a:hover {
 }
 
 .nav-item:not(.active) {
-  border: 1px solid var(--secondary);
+  border: 1px solid var(--header-color);
 }
 
 .nav-item:not(:first-child) {
@@ -167,7 +208,7 @@ a:hover {
   left: 0;
   width: 100%;
   height: 0;
-  background-color: var(--secondary);
+  background-color: var(--secondary-offset);
   transition: 0.3s all;
   z-index: -1;
 }
@@ -175,11 +216,11 @@ a:hover {
 .nav-item:hover:before {
   height: 100%;
   font-weight: bold;
-  background-color: var(--secondary-offset);
+  background-color: var(--secondary);
 }
 
 .nav-item.active {
-  background-color: var(--secondary-offset);
+  background-color: var(--secondary);
   font-weight: 600;
   color: var(--background);
 }
@@ -206,7 +247,7 @@ a:hover {
   position: absolute;
   height: 4px;
   width: 100%;
-  background: var(--secondary-offset);
+  background: var(--header-color);
   border-radius: 4px;
   opacity: 1;
   left: 0;
