@@ -192,6 +192,7 @@ function TableOfContents({ toc }: TableOfContentsProps): ReactElement {
       <div className={styles["blog-table-of-contents"]}>
         {toc.map((entry) => {
           const className = "blog-table-of-contents__" + entry.type;
+          if (!entry.id) return;
           const link = "#" + entry.id.replaceAll("-", "");
           console.log(className);
           return (
