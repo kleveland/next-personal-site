@@ -55,30 +55,21 @@ const SOCIAL_LIST = [
 
 const mobileBreakpoint = 680;
 
-export default function MainLayout({ children }: { children: JSX.Element }) {
+export default function MainLayout({ children, extendedHeader }: { children: JSX.Element, extendedHeader: boolean }) {
+  console.log('extend', extendedHeader);
   const router = useRouter();
   const matches = router.pathname.match(/(\/[\w+-]+)/g);
 
-  const [offset, setOffset] = useState(0);
   const [width, setWidth] = useState(0);
   const isMobile = width != 0 && width < mobileBreakpoint;
-  const isScrolled = offset > 225;
 
   useEffect(() => {
     setWidth(window.innerWidth);
-    setOffset(window.pageYOffset);
     const handleWindowResize = () => setWidth(window.innerWidth);
-    const handleScroll = () => setOffset(window.pageYOffset);
     window.addEventListener("resize", handleWindowResize);
-    window.addEventListener("scroll", handleScroll);
     // Return a function from the effect that removes the event listener
-    return () => {
-      window.removeEventListener("resize", handleScroll);
-      window.removeEventListener("resize", handleWindowResize);
-    };
+    return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
-
-  console.log(offset);
 
   NAV_LIST.forEach((item: NavItemProps, index: number) => {
     item.active = (matches ? matches[0] : router.pathname) === item.link;
@@ -86,14 +77,16 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
   return (
     <div className="page-container">
       <div
-        className={"header-parent-container " + (isScrolled ? "scrolled" : "")}
+        className={"header-parent-container"}
       >
-        <div className="header-container">
-          <div
+        <div className={"header-container " + (extendedHeader ? "extended": "")}>
+        <Link href="/">
+          <a
             className={"navigation-header-text " + (isMobile ? "mobile" : "")}
           >
             KC
-          </div>
+          </a>
+          </Link>
           <div
             className={"header-social-container " + (isMobile ? "mobile" : "")}
           >
@@ -108,7 +101,7 @@ export default function MainLayout({ children }: { children: JSX.Element }) {
           </div>
         </div>
       </div>
-      <div className="root-container">
+      <div className={"root-container " + (extendedHeader ? "extended": "")}>
         <div className="page-content">{children}</div>
         <div className="page-footer">Made with ♥ by Kacey Cleveland</div>
       </div>

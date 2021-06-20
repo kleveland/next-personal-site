@@ -12,11 +12,12 @@ import "../styles/globals.css";
 import "../styles/notion-overrides.css";
 
 import { ReactNode } from "react";
-
+import { NextComponentType, NextPageContext } from 'next';
 import type { AppProps } from "next/app";
 
 interface LayoutAppProps extends AppProps {
   Layout: ReactNode;
+  Component: NextComponentType<NextPageContext, any, {}> & { extendedHeader: boolean; }
 }
 
 const Noop = ({ children }: { children: ReactNode }) => children;
@@ -24,11 +25,14 @@ const Noop = ({ children }: { children: ReactNode }) => children;
 function MyApp({ Component, pageProps }: LayoutAppProps) {
   // @ts-expect-error
   const Layout = Component.Layout || Noop;
-
+  let hasExtendedHeader = false;
+  if (Component.extendedHeader) hasExtendedHeader = true;
+  console.log(Component.extendedHeader);
+  console.log(hasExtendedHeader);
   return (
     <>
       <a className="skip-link" href="#skip-link">Skip to main</a>
-      <Layout>
+      <Layout extendedHeader={hasExtendedHeader}>
         <Component {...pageProps} />
       </Layout>
     </>

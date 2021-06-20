@@ -2,9 +2,10 @@ import MainLayout from './../layouts/main'
 import { ReactElement } from 'react';
 import getPost from "./api/post";
 import { NotionRenderer } from "react-notion-x";
+import { ExtendedRecordMap } from "notion-types";
 
 interface ProjectPageProps {
-    recordMap: any;
+    recordMap: ExtendedRecordMap;
 }
 
 export const getStaticProps = async (context: any) => {
@@ -21,7 +22,6 @@ export const getStaticProps = async (context: any) => {
 
 
 function ProjectPage({ recordMap }: ProjectPageProps): ReactElement {
-    console.log(recordMap);
     return <NotionRenderer
     recordMap={recordMap}
     darkMode={false}
