@@ -50,7 +50,7 @@ function Home({
       </Head>
       <main className={styles.main}>
         <div className={styles["main-header-container"]}>
-          <Image src="/avatar.svg" width="198" height="210" />
+          <Image src="/avatar.svg" width="198" height="210" alt="Kacey Cleveland Avatar" />
           <NotionRenderer
             className={styles["main-body-container"]}
             recordMap={summaryRecordMap}
