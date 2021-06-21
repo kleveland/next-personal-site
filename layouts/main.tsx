@@ -56,7 +56,6 @@ const SOCIAL_LIST = [
 const mobileBreakpoint = 680;
 
 export default function MainLayout({ children, extendedHeader }: { children: JSX.Element, extendedHeader: boolean }) {
-  console.log('extend', extendedHeader);
   const router = useRouter();
   const matches = router.pathname.match(/(\/[\w+-]+)/g);
 

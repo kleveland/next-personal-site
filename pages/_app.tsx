@@ -27,8 +27,6 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
   const Layout = Component.Layout || Noop;
   let hasExtendedHeader = false;
   if (Component.extendedHeader) hasExtendedHeader = true;
-  console.log(Component.extendedHeader);
-  console.log(hasExtendedHeader);
   return (
     <>
       <a className="skip-link" href="#skip-link">Skip to main</a>
