@@ -13,8 +13,6 @@ export default async (pageId: string) => {
     },
     verticalColumns: false,
   });
-  const stack = result.data.cursor?.stack;
-  if (stack)
   
   return result.data;
 };

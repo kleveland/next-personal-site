@@ -3,7 +3,7 @@ const COLLECTION_ID: string = "19d7f583-b6a6-460d-9eb4-19c02a221c91";
 export default (pageList: any) => {
   const data = pageList.recordMap;
   const schemaMap = data.collection[COLLECTION_ID].value.schema;
-  const entries = Object.entries(data.block).filter((entry: any) => entry[1].value.properties).map((entry: any) => {
+  const entries = Object.entries(data.block).filter((entry: any) => entry[1].value.properties).reverse().map((entry: any) => {
 
     const newEntry:any = {
           id: entry[0],

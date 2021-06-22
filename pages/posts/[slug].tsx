@@ -16,7 +16,6 @@ const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
 export const getStaticProps = async (context: any) => {
   const mappedList = getPostList(pageList);
-  console.log("mappedList", mappedList);
   const foundPost = mappedList.find(
     (entry: any) => entry["Slug"] === context.params["slug"]
   );
@@ -98,14 +97,9 @@ function NotionPage({
     threshold: 0,
   });
 
-  console.log(inView, entry);
-
   if (!recordMap) {
     return null;
   }
-
-  const collectionId = pageBlock.value.parent_id;
-  const collection = recordMap.collection[collectionId]?.value;
 
   const pageHeader = (
     <div className={styles["blog-post-title-container"]}>
