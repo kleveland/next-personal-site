@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const PAGE_ENDPOINT: string =
-  "https://www.notion.so/api/v3/loadCachedPageChunk";
+  "https://www.notion.so/api/v3/loadPageChunk";
 
 export default async (pageId: string) => {
   const result: any = await axios.post(PAGE_ENDPOINT, {
