@@ -1,24 +1,23 @@
+import { ReactElement } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter, NextRouter } from "next/router";
-import Link from "next/link";
-import postSummaryStyles from "../styles/blogsummary.module.css";
-import { PostEntryCard, PostEntry } from '../pages/posts/index';
-import styles from "../styles/home.module.css";
-import MainLayout from "../layouts/main";
-import getPost from "./api/post";
-import getPostList from "./api/post-list";
+import { useRouter } from "next/router";
+import { PostEntryCard, PostEntry } from 'components/posts/PostEntryCard';
+import MainLayout from "layouts/main";
+import { getPost, getPostList } from 'utils/post-management';
 import pageList from "../_posts/data.json";
-import { ReactElement } from "react";
 import { NotionRenderer } from "react-notion-x";
 import { ExtendedRecordMap } from "notion-types";
+
+import styles from "styles/index.module.css";
+import postSummaryStyles from "styles/posts/index.module.css";
 
 interface HomeProps {
   summaryRecordMap: ExtendedRecordMap;
   mappedPostList: any;
 }
 
-export const getStaticProps = async (context: any) => {
+export const getStaticProps = async () => {
   const summaryResults = await getPost("352ff312-52da-470d-b7b5-dceb769bca23");
   const mappedPostList = getPostList(pageList);
 
@@ -66,7 +65,6 @@ function Home({ summaryRecordMap, mappedPostList }: HomeProps): ReactElement {
           {mappedPostList.map((entry: PostEntry, index: number) => (
             <PostEntryCard
               key={"post-entry-" + index}
-              router={router}
               {...entry}
             />
           ))}
