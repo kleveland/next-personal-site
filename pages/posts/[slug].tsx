@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "../../styles/blogpost.module.css";
 import getPostList from "../api/post-list";
 import getPost from "../api/post";
+import useOpenGraphImage from '../../utils/use-open-graph-image';
 import { NotionRenderer, Code, CollectionRow } from "react-notion-x";
 import { ExtendedRecordMap } from "notion-types";
 import { getPageTableOfContents, TableOfContentsEntry } from "notion-utils";
@@ -96,6 +97,8 @@ function NotionPage({
     /* Optional options */
     threshold: 0,
   });
+  const { imageURL } = useOpenGraphImage();
+  console.log('absolute URL', imageURL);
 
   if (!recordMap) {
     return null;
