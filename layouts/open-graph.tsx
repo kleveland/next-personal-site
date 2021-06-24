@@ -1,4 +1,4 @@
-import styles from 'styles/layouts/open-graph.module.css';
+import styles from 'styles/layouts/open-graph.module.scss';
 
 export default function OpenGraphLayout({ children }: { children: JSX.Element }) {
     return (

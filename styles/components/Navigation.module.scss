@@ -1,0 +1,179 @@
+.nav-item {
+    padding: 4px 16px;
+    width: 100px;
+    text-align: center;
+    height: 24px;
+    display: inline-block;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    color: var(--header-color);
+    z-index: 1;
+    border-radius: 16px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  
+  .nav-item:not(.active) {
+    border: 1px solid var(--header-color);
+  }
+  
+  .nav-item:not(:first-child) {
+    margin-left: 16px;
+  }
+  
+  .nav-item:hover {
+    border: 1px solid transparent;
+    color: var(--background);
+  }
+  
+  .nav-item:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
+  .nav-item:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--secondary-offset);
+    transition: 0.3s all;
+    z-index: -1;
+  }
+  
+  .nav-item:hover:before {
+    height: 100%;
+    font-weight: bold;
+    background-color: var(--secondary);
+  }
+  
+  .nav-item.active {
+    background-color: var(--secondary);
+    font-weight: 600;
+    color: var(--background);
+  }
+  
+  .mobile-burger-menu {
+    position: relative;
+    width: 24px;
+    height: 18px;
+    margin: 8px auto 0 auto;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    z-index: 2;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 4px;
+      width: 100%;
+      background: var(--header-color);
+      border-radius: 4px;
+      opacity: 1;
+      left: 0;
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transition: 0.25s ease-in-out;
+      -moz-transition: 0.25s ease-in-out;
+      -o-transition: 0.25s ease-in-out;
+      transition: 0.25s ease-in-out;
+      z-index: 2;
+
+      &:nth-child(1) {
+        top: 0px;
+      }
+
+      &:nth-child(2),
+      &:nth-child(3) {
+        top: 8px;
+      }
+
+      &:nth-child(4) {
+        top: 16px;
+      }
+    }
+
+    &.open span {
+      &:nth-child(1) {
+        top: 8px;
+        width: 0%;
+        left: 50%;
+      }
+
+      &:nth-child(2) {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
+
+      &:nth-child(4) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+      }
+    }
+
+  }
+  
+  .mobile-nav-items-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-top: 0;
+    max-height: 0;
+    overflow: hidden;
+    text-align: center;
+    background-color: var(--background);
+    z-index: 1;
+    transition: ease-in-out 0.3s all;
+    border-bottom: 0px solid black;
+  }
+  
+  .mobile-nav-items-container.open {
+    height: auto;
+    max-height: 200px;
+    padding-top: 4rem;
+    overflow: hidden;
+  }
+  
+  .nav-item-mobile {
+    cursor: pointer;
+  }
+  
+  .nav-item-mobile:first-child {
+    padding-bottom: 16px;
+  }
+  
+  .nav-item-mobile:not(:first-child) {
+    padding: 16px 0;
+    border-top: 1px solid var(--main);
+  }
+  
+  .nav-item-mobile:last-child {
+    border-bottom: 1px solid black;
+  }

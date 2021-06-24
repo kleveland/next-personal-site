@@ -1,178 +1,82 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useState, useCallback } from "react";
-import GithubComponent from "../svg/github";
+import {
+  NAV_LIST,
+  SOCIAL_LIST,
+  SocialIcon,
+  NavItemMenu,
+  NavItem,
+} from "components/Navigation";
+import useResize from "utils/use-resize";
 import Link from "next/link";
-import LinkedinComponent from "../svg/linkedin";
-import MediumComponent from "../svg/medium";
+import cn from "classnames";
 
-interface NavItemProps {
-  title: string;
-  link: string;
-  active?: boolean;
+import styles from "styles/layouts/main.module.scss";
+
+const MOBILE_BREAKPOINT = 680;
+
+interface MainLayoutProps {
+  children: JSX.Element;
+  extendedHeader: boolean;
 }
 
-interface NavItemMobileProps extends NavItemProps {
-  toggleOpen: () => void;
-}
+export default function MainLayout({
+  children,
+  extendedHeader,
+}: MainLayoutProps) {
 
-interface SocialIconProps {
-  path: string;
-  link: string;
-  title: string;
-  component: ReactElement;
-}
-
-const NAV_LIST = [
-  {
-    title: "Home",
-    link: "/",
-  },
-  { title: "Projects", link: "/projects" },
-  { title: "Posts", link: "/posts" },
-];
-
-const SOCIAL_LIST = [
-  {
-    path: "/social/github.svg",
-    link: "https://github.com/kleveland",
-    title: "Github Profile",
-    component: <GithubComponent width={24} height={24} />,
-  },
-  {
-    path: "/social/linkedin.svg",
-    link: "https://www.linkedin.com/in/kaceycleveland/",
-    title: "Linkedin Profile",
-    component: <LinkedinComponent width={24} height={24} />,
-  },
-  {
-    path: "/social/medium.svg",
-    link: "https://kaceycleveland.medium.com/",
-    title: "Medium Profile",
-    component: <MediumComponent width={24} height={24} />,
-  },
-];
-
-const mobileBreakpoint = 680;
-
-export default function MainLayout({ children, extendedHeader }: { children: JSX.Element, extendedHeader: boolean }) {
+  // Set active nav item
   const router = useRouter();
   const matches = router.pathname.match(/(\/[\w+-]+)/g);
-
-  const [width, setWidth] = useState(0);
-  const isMobile = width != 0 && width < mobileBreakpoint;
-
-  useEffect(() => {
-    setWidth(window.innerWidth);
-    const handleWindowResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleWindowResize);
-    // Return a function from the effect that removes the event listener
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  NAV_LIST.forEach((item: NavItemProps, index: number) => {
+  NAV_LIST.forEach((item) => {
     item.active = (matches ? matches[0] : router.pathname) === item.link;
   });
+
+  // Detect width to resize to mobile if needed
+  const { width, isMobile } = useResize(MOBILE_BREAKPOINT);
+
   return (
-    <div className="page-container">
-      <div
-        className={"header-parent-container"}
-      >
-        <div className={"header-container " + (extendedHeader ? "extended": "")}>
-        <Link href="/">
-          <a
-            className={"navigation-header-text " + (isMobile ? "mobile" : "")}
-          >
-            KC
-          </a>
+    <div className={styles["page-container"]}>
+      <div className={styles["header-parent-container"]}>
+        <div
+          className={cn(styles["header-container"], {
+            [styles.extended]: extendedHeader,
+          })}
+        >
+          <Link href="/">
+            <a
+              className={cn(styles["navigation-header-text"], {
+                [styles.mobile]: isMobile,
+              })}
+            >
+              KC
+            </a>
           </Link>
           <div
-            className={"header-social-container " + (isMobile ? "mobile" : "")}
+            className={cn(styles["header-social-container"], {
+              [styles.mobile]: isMobile,
+            })}
           >
             {SOCIAL_LIST.map(SocialIcon)}
           </div>
-          <div className="navigation-container">
+          <div className={styles["navigation-container"]}>
             {width != 0 && (
-              <div className="navigation-inner-container">
+              <div className={styles["navigation-inner-container"]}>
                 {isMobile ? <NavItemMenu /> : NAV_LIST.map(NavItem)}
               </div>
             )}
           </div>
         </div>
       </div>
-      <div className={"root-container " + (extendedHeader ? "extended": "")}>
-        <div className="page-content">{children}</div>
-        <div className="page-footer">Made with ♥ by Kacey Cleveland</div>
-      </div>
-    </div>
-  );
-}
-
-function NavItem({ title, link, active }: NavItemProps, index: number) {
-  return (
-    <Link href={link} key={"nav-item-" + index}>
       <div
-        id={index === 0 ? "skip-link" : undefined}
-        className={"nav-item " + (active ? "active" : "")}
+        className={cn(styles["root-container"], {
+          [styles.extended]: extendedHeader,
+        })}
       >
-        {title}
+        <div className={styles["page-content"]}>{children}</div>
+        <div className={styles["page-footer"]}>
+          Made with ♥ by Kacey Cleveland
+        </div>
       </div>
-    </Link>
-  );
-}
-
-function NavItemMenu() {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleOpen = () => setIsOpen(!isOpen);
-  return (
-    <div className="mobile-menu-container">
-      <div
-        onClick={toggleOpen}
-        className={"mobile-burger-menu " + (isOpen ? "open" : "")}
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div className={"mobile-nav-items-container " + (isOpen ? "open" : "")}>
-        {NAV_LIST.map((NavItem, index) =>
-          NavItemMobile({ ...NavItem, toggleOpen }, index)
-        )}
-      </div>
-    </div>
-  );
-}
-
-function NavItemMobile(
-  { title, link, active, toggleOpen }: NavItemMobileProps,
-  index: number
-) {
-  return (
-    <Link href={link} key={"nav-item-" + index}>
-      <div
-        onClick={toggleOpen}
-        className={"nav-item-mobile " + (active ? "active" : "")}
-      >
-        {title}
-      </div>
-    </Link>
-  );
-}
-
-function SocialIcon(
-  { link, title, component }: SocialIconProps,
-  index: number
-) {
-  return (
-    <div
-      title={title}
-      className="social-icon-container"
-      key={"social-item-" + index}
-    >
-      <Link href={link}>
-        <a>{component}</a>
-      </Link>
     </div>
   );
 }

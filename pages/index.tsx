@@ -1,16 +1,16 @@
 import { ReactElement } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { PostEntryCard, PostEntry } from 'components/posts/PostEntryCard';
+import { PostEntryCard, PostEntry } from "components/posts/PostEntryCard";
 import MainLayout from "layouts/main";
-import { getPost, getPostList } from 'utils/post-management';
+import { getPost, getPostList } from "utils/post-management";
 import pageList from "../_posts/data.json";
 import { NotionRenderer } from "react-notion-x";
 import { ExtendedRecordMap } from "notion-types";
+import cn from "classnames";
 
-import styles from "styles/index.module.css";
-import postSummaryStyles from "styles/posts/index.module.css";
+import styles from "styles/index.module.scss";
+import postSummaryStyles from "styles/posts/index.module.scss";
 
 interface HomeProps {
   summaryRecordMap: ExtendedRecordMap;
@@ -32,7 +32,6 @@ export const getStaticProps = async () => {
 };
 
 function Home({ summaryRecordMap, mappedPostList }: HomeProps): ReactElement {
-  const router = useRouter();
   return (
     <div className={styles.container}>
       <Head>
@@ -54,19 +53,16 @@ function Home({ summaryRecordMap, mappedPostList }: HomeProps): ReactElement {
           />
         </div>
         <div
-          className={
-            postSummaryStyles["blog-posts-title-container"] +
-            " notion-h notion-h1"
-          }
+          className={cn(
+            postSummaryStyles["blog-posts-title-container"],
+            "notion-h notion-h1"
+          )}
         >
           Recent Posts
         </div>
         <div className={postSummaryStyles["blog-posts-main-container"]}>
           {mappedPostList.map((entry: PostEntry, index: number) => (
-            <PostEntryCard
-              key={"post-entry-" + index}
-              {...entry}
-            />
+            <PostEntryCard key={"post-entry-" + index} {...entry} />
           ))}
         </div>
       </main>

@@ -1,15 +1,15 @@
 // core styles shared by all of react-notion-x (required)
 import "react-notion-x/src/styles.css";
 
-import "../styles/prism-theme.css";
+import "../styles/prism-theme.scss";
 
 // used for collection views (optional)
 import "rc-dropdown/assets/index.css";
 
 // used for rendering equations (optional)
 import "katex/dist/katex.min.css";
-import "../styles/globals.css";
-import "../styles/notion-overrides.css";
+import "../styles/globals.scss";
+import "../styles/notion-overrides.scss";
 
 import { ReactNode } from "react";
 import { NextComponentType, NextPageContext } from 'next';

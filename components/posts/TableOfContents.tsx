@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import Link from 'next/link';
 import { TableOfContentsEntry } from "notion-utils";
-import styles from 'styles/components/TableOfContents.module.css';
+import styles from 'styles/components/posts/TableOfContents.module.scss';
 
 interface TableOfContentsProps {
   toc: TableOfContentsEntry[];
@@ -20,7 +20,6 @@ export default function TableOfContents({
           const className = "blog-table-of-contents__" + entry.type;
           if (!entry.id.replaceAll) return;
           const link = "#" + entry.id.replaceAll("-", "");
-          console.log(className);
           return (
             <Link href={link}>
               <div

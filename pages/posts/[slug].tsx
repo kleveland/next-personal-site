@@ -1,21 +1,22 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
-import {useRouter} from "next/router";
-import styles from "styles/posts/[slug].module.css";
+import { useRouter } from "next/router";
+import styles from "styles/posts/[slug].module.scss";
 import {
   getPostFromSlug,
   findPageBlock,
   getImageUrlFromPageBlock,
-  getSlugPaths
+  getSlugPaths,
 } from "utils/post-management";
-import TableOfContents from 'components/posts/TableOfContents';
+import TableOfContents from "components/posts/TableOfContents";
 import useOpenGraphImage from "utils/use-open-graph-image";
 import { getAbsoluteURL } from "utils/utils";
 import { NotionRenderer, Code, CollectionRow } from "react-notion-x";
 import { ExtendedRecordMap } from "notion-types";
 import { getPageTableOfContents } from "notion-utils";
 import { useInView } from "react-intersection-observer";
+import cn from "classnames";
 import MainLayout from "layouts/main";
 
 export const getStaticProps = async (context: any) => {
@@ -72,8 +73,6 @@ function NotionPage({
   const router = useRouter();
   const { imageURL } = useOpenGraphImage();
   const rootURL = getAbsoluteURL(router.asPath);
-  console.log("absolute URL", imageURL, rootURL);
-  console.log("router", router);
 
   if (!recordMap) {
     return null;
@@ -81,7 +80,7 @@ function NotionPage({
 
   const pageHeader = (
     <div className={styles["blog-post-title-container"]}>
-      <div className={styles["blog-post-title"] + " notion-h notion-h1"}>
+      <div className={cn(styles["blog-post-title"], " notion-h notion-h1")}>
         {title}
       </div>
     </div>
@@ -101,20 +100,16 @@ function NotionPage({
 
       <div
         ref={ref}
-        className={
-          styles["blog-post-image-container"] +
-          " " +
-          (!inView ? styles["not-in-view"] : "")
-        }
+        className={cn(styles["blog-post-image-container"], {
+          [styles["not-in-view"]]: !inView,
+        })}
       >
         <Image src={imageUrl} width={140} height={140} alt="Post image" />
       </div>
       <div
-        className={
-          styles["blog-post-content-container"] +
-          " " +
-          (!inView ? styles["set-index"] : "")
-        }
+        className={cn(styles["blog-post-content-container"], {
+          [styles["set-index"]]: !inView,
+        })}
       >
         <CollectionRow block={pageBlock.value} />
         <div className={styles["blog-post-container"]}>

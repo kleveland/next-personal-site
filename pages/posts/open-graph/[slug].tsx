@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "styles/posts/open-graph/[slug].module.css";
+import styles from "styles/posts/open-graph/[slug].module.scss";
 import {
   getPostFromSlug,
   findPageBlock,
