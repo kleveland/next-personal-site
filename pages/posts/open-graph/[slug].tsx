@@ -48,6 +48,7 @@ function NotionPage({
   imageUrl: string;
   pageBlock: any;
 }) {
+  if (!title || !Tags || !imageUrl || !Description) return <>Failed Image</>;
   return (
     <div className={styles["content-container"]}>
       <div className={styles["blog-post-image-container"]}>
