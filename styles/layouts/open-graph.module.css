@@ -1,0 +1,31 @@
+.page-container {
+    width: 1200px;
+    height: 630px;
+    background: 
+    radial-gradient(
+      circle at right top,
+      var(--main), 
+      transparent
+    ),
+    radial-gradient(
+      ellipse at right bottom,
+      var(--secondary-offset), 
+      transparent
+    ),
+    radial-gradient(
+      ellipse at left bottom,
+      var(--secondary),
+      transparent
+    ),
+    radial-gradient(
+      circle at left top,
+      var(--main),
+      transparent
+    ),
+    radial-gradient(
+      circle at center,
+      var(--secondary-offset), 
+      transparent
+    );
+  background-size: 400% 100%;
+}

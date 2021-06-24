@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Image from "next/image";
+import {useRouter} from "next/router";
 import styles from "styles/posts/[slug].module.css";
 import {
   getPostFromSlug,
@@ -10,6 +11,7 @@ import {
 } from "utils/post-management";
 import TableOfContents from 'components/posts/TableOfContents';
 import useOpenGraphImage from "utils/use-open-graph-image";
+import { getAbsoluteURL } from "utils/utils";
 import { NotionRenderer, Code, CollectionRow } from "react-notion-x";
 import { ExtendedRecordMap } from "notion-types";
 import { getPageTableOfContents } from "notion-utils";
@@ -67,8 +69,11 @@ function NotionPage({
     /* Optional options */
     threshold: 0,
   });
+  const router = useRouter();
   const { imageURL } = useOpenGraphImage();
-  console.log("absolute URL", imageURL);
+  const rootURL = getAbsoluteURL(router.asPath);
+  console.log("absolute URL", imageURL, rootURL);
+  console.log("router", router);
 
   if (!recordMap) {
     return null;
@@ -87,6 +92,10 @@ function NotionPage({
       <Head>
         <title>Kacey Cleveland - {title}</title>
         <meta name="description" content={Description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={rootURL} />
+        <meta property="og:image" content={imageURL} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
