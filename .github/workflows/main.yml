@@ -32,7 +32,7 @@ jobs:
         uses: JamesIves/fetch-api-data-action@releases/v1
         with:
           ENDPOINT: https://www.notion.so/api/v3/queryCollection
-          CONFIGURATION: '{ "method": "POST", "headers": { "content-type": "application/json" }, "body": { "collectionId": "19d7f583-b6a6-460d-9eb4-19c02a221c91", "collectionViewId": "5e65b9ab-dc54-4ecd-bae7-94e390151488", "loader": { "type": "reducer", "reducers": { "collection_group_results": { "type": "results", "limit": 50 }, "table:title:count": { "type": "aggregation", "aggregation": { "property": "title", "aggregator": "count" } } }, "searchQuery": "", "userTimeZone": "America/New_York" }, "query": {} } }'
+          CONFIGURATION: '{ "method": "POST", "headers": { "content-type": "application/json" }, "body": { "collectionId": "${{ secrets.COLLECTION_ID }}", "collectionViewId": "${{ secrets.COLLECTION_VIEW_ID }}", "loader": { "type": "reducer", "reducers": { "collection_group_results": { "type": "results", "limit": 50 }, "table:title:count": { "type": "aggregation", "aggregation": { "property": "title", "aggregator": "count" } } }, "searchQuery": "", "userTimeZone": "America/New_York" }, "query": {} } }'
 
       - name: Store Data in _posts/data.json 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
