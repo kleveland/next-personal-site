@@ -5,8 +5,6 @@ import { ExtendedRecordMap } from "notion-types";
 
 const PAGE_ENDPOINT: string = "https://www.notion.so/api/v3/loadPageChunk";
 
-const COLLECTION_ID: string = "19d7f583-b6a6-460d-9eb4-19c02a221c91";
-
 export const getPost = async (pageId: string) => {
   const result: any = await axios.post(PAGE_ENDPOINT, {
     chunkNumber: 0,
@@ -23,7 +21,8 @@ export const getPost = async (pageId: string) => {
 
 export const getPostList = (pageList: any) => {
   const data = pageList.recordMap;
-  const schemaMap = data.collection[COLLECTION_ID].value.schema;
+  const collectionId = Object.keys(data.collection)[0];
+  const schemaMap = data.collection[collectionId].value.schema;
   const entries = Object.entries(data.block)
     .filter((entry: any) => entry[1].value.properties)
     .reverse()
