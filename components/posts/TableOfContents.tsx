@@ -16,12 +16,12 @@ export default function TableOfContents({
         Table of Contents
       </div>
       <div className={styles["blog-table-of-contents"]}>
-        {toc.map((entry) => {
+        {toc.map((entry, index) => {
           const className = "blog-table-of-contents__" + entry.type;
           if (!entry.id.replaceAll) return;
           const link = "#" + entry.id.replaceAll("-", "");
           return (
-            <Link href={link}>
+            <Link href={link} key={'toc-' + index}>
               <div
                 className={
                   styles["blog-table-of-contents__entry"] +

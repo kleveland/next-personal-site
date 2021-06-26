@@ -38,6 +38,22 @@
   font-size: 2rem;
   margin: 0;
 }
+.comments-in-view {
+  width: 100%;
+}
+
+.loading-comments {
+  font-size: 3rem;
+}
+
+.comments-render-container {
+  width: 100%;
+  border-top: 1px solid var(--light-text);
+  margin-top: 2rem;
+  .utterances {
+    width: 100%;
+  }
+}
 
 @media only screen and (max-width: 640px) {
   .blog-post-container {

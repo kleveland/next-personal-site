@@ -22,10 +22,26 @@ export const getPost = async (pageId: string) => {
 export const getPostList = (pageList: any) => {
   const data = pageList.recordMap;
   const collectionId = Object.keys(data.collection)[0];
+  const collectionViewId = Object.keys(data.collection_view)[0];
   const schemaMap = data.collection[collectionId].value.schema;
+  const collectionViewSort = data.collection_view[
+    collectionViewId
+  ].value.query2.sort.filter(
+    (field: { property: string; direction: string }) =>
+      field.property !== "title"
+  )[0];
+  console.log("SORT", collectionViewSort);
   const entries = Object.entries(data.block)
     .filter((entry: any) => entry[1].value.properties)
-    .reverse()
+    .sort(
+      (a: any, b: any) =>
+        new Date(
+          b[1].value.properties[collectionViewSort.property][0][1][0][1].start_date
+        ).getTime() -
+        new Date(
+          a[1].value.properties[collectionViewSort.property][0][1][0][1].start_date
+        ).getTime()
+    )
     .map((entry: any) => {
       const newEntry: any = {
         id: entry[0],

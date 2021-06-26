@@ -62,7 +62,7 @@ interface SocialIconProps {
 
 export function NavItem({ title, link, active }: NavItemProps, index: number) {
   return (
-    <Link href={link} key={styles["nav-item-" + index]}>
+    <Link href={link} key={"nav-item-" + index}>
       <div
         id={index === 0 ? "skip-link" : undefined}
         className={cn(styles["nav-item"], { [styles.active]: active })}

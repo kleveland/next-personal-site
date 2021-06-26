@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -11,11 +11,11 @@ import {
 } from "utils/post-management";
 import TableOfContents from "components/posts/TableOfContents";
 import useOpenGraphImage from "utils/use-open-graph-image";
+import useUtterances from "utils/use-utterances";
 import { getAbsoluteURL } from "utils/utils";
 import { NotionRenderer, Code, CollectionRow } from "react-notion-x";
 import { ExtendedRecordMap } from "notion-types";
 import { getPageTableOfContents } from "notion-utils";
-import { useInView } from "react-intersection-observer";
 import cn from "classnames";
 import MainLayout from "layouts/main";
 
@@ -66,13 +66,12 @@ function NotionPage({
   imageUrl: string;
   pageBlock: any;
 }) {
-  const { ref, inView, entry } = useInView({
-    /* Optional options */
-    threshold: 0,
-  });
   const router = useRouter();
   const { imageURL } = useOpenGraphImage();
   const rootURL = getAbsoluteURL(router.asPath);
+  const { inViewRef, utterancesRef, loaded } = useUtterances({
+    repo: "kleveland/next-personal-site",
+  });
 
   if (!recordMap) {
     return null;
@@ -83,6 +82,16 @@ function NotionPage({
       <div className={cn(styles["blog-post-title"], " notion-h notion-h1")}>
         {title}
       </div>
+    </div>
+  );
+
+  const commentsRender = (
+    <div className={styles["comments-in-view"]} ref={inViewRef}>
+      { !loaded && <div className={styles["loading-comments"]}>Loading...</div>}
+      <div
+        ref={utterancesRef}
+        className={styles["comments-render-container"]}
+      ></div>
     </div>
   );
 
@@ -98,23 +107,15 @@ function NotionPage({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div
-        ref={ref}
-        className={cn(styles["blog-post-image-container"], {
-          [styles["not-in-view"]]: !inView,
-        })}
-      >
+      <div ref={inViewRef} className={cn(styles["blog-post-image-container"])}>
         <Image src={imageUrl} width={140} height={140} alt="Post image" />
       </div>
-      <div
-        className={cn(styles["blog-post-content-container"], {
-          [styles["set-index"]]: !inView,
-        })}
-      >
+      <div className={cn(styles["blog-post-content-container"])}>
         <CollectionRow block={pageBlock.value} />
         <div className={styles["blog-post-container"]}>
           <NotionRenderer
             pageHeader={pageHeader}
+            pageFooter={commentsRender}
             className={styles["blog-post-notion-container"]}
             components={{
               code: Code,

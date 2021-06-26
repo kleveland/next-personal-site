@@ -55,5 +55,11 @@
     top: calc(min(330px, 30vh));
     align-items: baseline;
     margin-left: 4rem;
+    transition: 0.2s opacity;
+    opacity: 0.3;
+  }
+
+  .blog-notion-aside:hover {
+    opacity: 1;
   }
 }
