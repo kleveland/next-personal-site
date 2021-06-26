@@ -30,7 +30,6 @@ export const getPostList = (pageList: any) => {
     (field: { property: string; direction: string }) =>
       field.property !== "title"
   )[0];
-  console.log("SORT", collectionViewSort);
   const entries = Object.entries(data.block)
     .filter((entry: any) => entry[1].value.properties)
     .sort(
