@@ -5,14 +5,19 @@
   overflow: hidden auto;
   min-width: 222px;
   overflow: auto;
+
+  a {
+    text-decoration: none;
+  }
   
   &__entry {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    margin-bottom: 0.25rem;
-    margin-left: 0.25rem;
+    padding-top: 0.15rem;
+    padding-bottom: 0.15rem;
+    margin-bottom: 0.15rem;
+    margin-left: 0.15rem;
     border-radius: 0.5rem;
     padding-left: 1rem;
+    font-size: 0.9rem;
     transition: all 0.3s;
 
     &:hover {
